@@ -10,9 +10,11 @@
 #define ARTIFACT 7
 #define POWERUP 8
 #define NS_AIR 9
+
 #define UI_SCORE 10
 #define UI_HP 11
-#define UI_LEVEL 12
+#define UI_ROOM 12
+#define UI_LEVELS 13
 
 
 MainWindow::MainWindow(char wallch, char playerch, char enemych){
@@ -30,9 +32,11 @@ MainWindow::MainWindow(char wallch, char playerch, char enemych){
 	init_pair(BARRICADE, COLOR_RED,  COLOR_BLACK);
 	init_pair(ARTIFACT, COLOR_YELLOW,  COLOR_BLACK);
 	init_pair(POWERUP, COLOR_WHITE,  COLOR_BLACK);
+
 	init_pair(UI_SCORE, COLOR_BLACK,  COLOR_YELLOW);
 	init_pair(UI_HP, COLOR_BLACK,  COLOR_RED);
-	init_pair(UI_LEVEL, COLOR_BLACK,  COLOR_GREEN);
+	init_pair(UI_ROOM, COLOR_BLACK,  COLOR_GREEN);
+	init_pair(UI_LEVELS, COLOR_BLACK,  COLOR_MAGENTA);
 }
 
 char MainWindow::matrix_translate(int toConvert){
@@ -53,9 +57,9 @@ char MainWindow::matrix_translate(int toConvert){
 void MainWindow::print_room(Room *room, Player *player, int level_id){
 	clear();	// clear screen
 
-	attron(COLOR_PAIR(UI_LEVEL));
-	printw(" LEVEL: %d ", level_id);
-	attroff(COLOR_PAIR(UI_LEVEL));
+	attron(COLOR_PAIR(UI_ROOM));
+	printw(" ROOM: %d ", level_id);
+	attroff(COLOR_PAIR(UI_ROOM));
 
 	attron(COLOR_PAIR(UI_HP));
 	printw(" HP: %d/%d ", player->hp, player->maxHP);
@@ -64,6 +68,10 @@ void MainWindow::print_room(Room *room, Player *player, int level_id){
 	attron(COLOR_PAIR(UI_SCORE));
 	printw(" SCORE: %d \n", player->score);
 	attroff(COLOR_PAIR(UI_SCORE));
+
+	attron(COLOR_PAIR(UI_LEVELS));
+	printw(" livelli qui\n");
+	attroff(COLOR_PAIR(UI_LEVELS));
 
 	for(int i = 0; i < 20; i++) {
 		for(int j = 0; j < 20; j++) {
