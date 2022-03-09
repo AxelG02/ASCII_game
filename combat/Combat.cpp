@@ -32,7 +32,7 @@ void Combat::rand_mv(p_enemyList p_enemy, Room *room){
 
 	while(!check){
 
-		int m = rand()%4;
+		int m = rand()%6;
 
 		switch (m){
 		case 0:
@@ -48,16 +48,18 @@ void Combat::rand_mv(p_enemyList p_enemy, Room *room){
 			check = p_enemy->enemy.mv_down(room);
 			break;
 		default:
+			check = true;
 			break;
 		}
 	}
 }
+bool Combat::player_scan(Room *room, Enemy enemy){return true;}
 
 void Combat::enemy_movement(Room *room){
 
 	p_enemyList temp = this->head;
 	while(temp!=nullptr){
-		if(!(temp->enemy.isDead)){
+		if(!(temp->enemy.isDead) /*&& player_scan(*room, temp->enemy)*/){
 			rand_mv(temp, room);
 		}
 		temp = temp->next;

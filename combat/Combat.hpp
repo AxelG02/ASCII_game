@@ -22,6 +22,7 @@ class Combat {
     void head_push(Enemy e);
     void enemy_obj_assign(Room *room);
     void rand_mv(p_enemyList p, Room *room);
+    bool player_scan(Room *room, Enemy enemy);
     void enemy_movement(Room *room);
     void enemy_kill(Room *room, Player *player);
     void enemy_destroy(int x,int y);
