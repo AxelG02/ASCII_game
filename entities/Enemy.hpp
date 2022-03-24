@@ -7,6 +7,7 @@
 
 class Enemy : public Entity{
     public:
+        bool attackMode;
 	
 	Enemy();
 	Enemy(Room *room, int hp, int dmg, bool isDead=false, int x=0, int y=0);

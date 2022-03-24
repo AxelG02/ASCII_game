@@ -53,15 +53,38 @@ void Combat::rand_mv(p_enemyList p_enemy, Room *room){
 		}
 	}
 }
-bool Combat::player_scan(Room *room, Enemy enemy){return true;}
+bool Combat::player_scan(Room *room, Enemy enemy){
+	return true;
+}
 
-void Combat::enemy_movement(Room *room){
+void Combat::enemy_attack(Room *room, Enemy enemy, Player *player){
+	int x = enemy.x, y = enemy.y;
+
+	if(room->currentRoom[y][x-1] == 1 || room->currentRoom[y][x+1] == 1 || room->currentRoom[y-1][x] == 1 || room->currentRoom[y+1][x] == 1){
+		if(enemy.attackMode) {
+			player->hp = player->hp - enemy.dmg;
+			enemy.attackMode = false;
+		}
+		else enemy.attackMode = true;
+	}
+	else enemy.attackMode = false;
+}
+
+void Combat::enemy_routine(Room *room, Player *player){
 
 	p_enemyList temp = this->head;
 	while(temp!=nullptr){
-		if(!(temp->enemy.isDead) /*&& player_scan(*room, temp->enemy)*/){
-			rand_mv(temp, room);
+		int x = temp->enemy.x, y = temp->enemy.y;
+		bool doNotMove = false;
+		
+		if(room->currentRoom[y][x-1] == 1 || room->currentRoom[y][x+1] == 1 || room->currentRoom[y-1][x] == 1 || room->currentRoom[y+1][x] == 1){
+		doNotMove = true;
 		}
+
+		if(!(temp->enemy.attackMode) && !doNotMove) rand_mv(temp, room);
+
+		enemy_attack(room, temp->enemy, player);
+
 		temp = temp->next;
 	}
 }

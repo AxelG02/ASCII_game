@@ -122,7 +122,7 @@ int main() {
 		
 		// controllo il tasto premuto
 		check_key(&player, &combatSystem, &activeRoom, c);
-		combatSystem.enemy_movement(&activeRoom);
+		combatSystem.enemy_routine(&activeRoom, &player);
 		pickUp.check_if_exist(&activeRoom);
 		check_gate(&activeRoom, &pickUp, &combatSystem);
 		mapMemory.modify_node(activeRoom.currentRoom);

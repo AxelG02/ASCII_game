@@ -7,6 +7,7 @@ Enemy::Enemy(Room *room, int hp, int dmg, bool isDead, int x, int y){
 	this->x = x;
 	this->y = y;
 	room->currentRoom[this->y][this->x] = 3;	//spawna il nemico
+	this->attackMode = false;
 }
 
 Enemy::Enemy(){
