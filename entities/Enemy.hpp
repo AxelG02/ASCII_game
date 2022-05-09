@@ -16,6 +16,9 @@ class Enemy : public Entity{
     bool mv_right(Room *room);
     bool mv_up(Room *room);
     bool mv_down(Room *room);
+    void set_attackMode_true();
+    void set_attackMode_false();
+    bool get_attackMode();
 
 };
 #endif

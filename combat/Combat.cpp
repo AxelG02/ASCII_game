@@ -59,15 +59,16 @@ bool Combat::player_scan(Room *room, Enemy enemy){
 
 void Combat::enemy_attack(Room *room, Enemy enemy, Player *player){
 	int x = enemy.x, y = enemy.y;
+	
 
 	if(room->currentRoom[y][x-1] == 1 || room->currentRoom[y][x+1] == 1 || room->currentRoom[y-1][x] == 1 || room->currentRoom[y+1][x] == 1){
-		if(enemy.attackMode) {
+		if(enemy.get_attackMode()) {
 			player->hp = player->hp - enemy.dmg;
-			enemy.attackMode = false;
+			enemy.set_attackMode_false();
 		}
-		else enemy.attackMode = true;
+		else enemy.set_attackMode_true();
 	}
-	else enemy.attackMode = false;
+	else enemy.set_attackMode_false();
 }
 
 void Combat::enemy_routine(Room *room, Player *player){

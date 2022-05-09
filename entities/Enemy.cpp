@@ -59,5 +59,14 @@ bool Enemy::mv_down(Room *room){
 	else return false;
 }
 
-
+void Enemy::set_attackMode_true(){
+	this->attackMode = true;
+}
 	
+void Enemy::set_attackMode_false(){
+	this->attackMode = false;
+}
+
+bool Enemy::get_attackMode(){
+	return this->attackMode;
+}
